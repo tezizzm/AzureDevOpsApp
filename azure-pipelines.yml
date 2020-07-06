@@ -26,5 +26,5 @@ steps:
 - script: pwd && dotnet test
   displayName: 'dotnet test $(buildConfiguration)'
 
-- script: pwd &&& dotnet publish -o .\publish --configuration $(buildConfiguration)
+- script: pwd && dotnet publish -o .\publish --configuration $(buildConfiguration)
   displayName: 'dotnet publish $(buildConfiguration)'
