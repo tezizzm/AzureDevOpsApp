@@ -16,7 +16,7 @@ variables:
   system.debug: true
 
 jobs:
-- job:
+- job: Build
   steps:
   - task: UseDotNet@2
     inputs:
@@ -41,8 +41,8 @@ jobs:
   - script: |
       echo "Creating final application package..."
       dotnet publish $(applicationProject) -o $(Build.BinariesDirectory) --configuration $(buildConfiguration)
-      echo ls ./publish
-      ls ./publish
+      echo echo $(Build.BinariesDirectory)
+      ls $(Build.BinariesDirectory)
     displayName: 'Package Final Application'
 
   #- task: AzureFileCopy@4
@@ -68,6 +68,8 @@ jobs:
     displayName: 'Publish Build Package'
 
 - job:
+  dependsOn: Build
+  condition: succeeded('Build')
   steps:
   - task: DownloadBuildArtifacts@0
     inputs:
