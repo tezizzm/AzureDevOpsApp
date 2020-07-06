@@ -13,6 +13,7 @@ variables:
   buildConfiguration: 'Release'
   testProject: ./AzureDevOpsTest/AzureDevOpsTest.csproj
   applicationProject: ./AzureDevOpsApp/AzureDevOpsApp.csproj
+  system.debug: true
 
 jobs:
 - job:
