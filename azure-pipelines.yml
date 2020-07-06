@@ -23,8 +23,8 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: pwd && dotnet test
+- script: pwd && ls && dotnet test ./AzureDevOpsTest/AzureDevOpsTest.csproj
   displayName: 'dotnet test $(buildConfiguration)'
 
-- script: pwd && dotnet publish -o .\publish --configuration $(buildConfiguration)
+- script: pwd && ls && dotnet publish ./AzureDevOpsApp/AzureDevOpsApp.csproj -o ./publish --configuration $(buildConfiguration)
   displayName: 'dotnet publish $(buildConfiguration)'
