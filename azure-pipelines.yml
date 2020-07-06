@@ -87,6 +87,14 @@ jobs:
     inputs:
       cfVersion: '6.43.0'
 
-     
+  - task: CloudFoundry@1
+    inputs:
+      cfEndpoint: 'PCF One'
+      org: 'pivot-mkillens'
+      space: 'tgen'
+      deploymentOptions: 'manifest'
+      cfManifest: './manifest.yml'
+      createServices: false
+      bindServices: false
 
   
