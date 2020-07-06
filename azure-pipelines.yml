@@ -11,6 +11,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  testProject: ./AzureDevOpsTest/AzureDevOpsTest.csproj
+  applicationProject: ./AzureDevOpsApp/AzureDevOpsApp.csproj
 
 steps:
 - task: UseDotNet@2
@@ -18,13 +20,22 @@ steps:
     version: '3.1.x'
     packageType: sdk
 
-- script: dotnet restore
+- script: |
+    echo "Restrieving external libraries..."
+    dotnet restore
+  displayName: 'Resolve Dependencies'
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- script: |
+    echo "Building projects..."
+    dotnet build --configuration $(buildConfiguration)
+  displayName: 'Build Source'
 
-- script: pwd && ls && dotnet test ./AzureDevOpsTest/AzureDevOpsTest.csproj
-  displayName: 'dotnet test $(buildConfiguration)'
+- script: |
+    echo "Running tests...""
+    dotnet test $(testProject)
+  displayName: 'Execute Tests'
 
-- script: pwd && ls && dotnet publish ./AzureDevOpsApp/AzureDevOpsApp.csproj -o ./publish --configuration $(buildConfiguration)
-  displayName: 'dotnet publish $(buildConfiguration)'
+- script: |
+    echo "Creating final application package..."
+    dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
+  displayName: 'Final Application Package'
