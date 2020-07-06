@@ -65,7 +65,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathToPublish: $(Build.ArtifactStagingDirectory)
-      artifactName: ADOBuildOutpot
+      artifactName: ADOBuildOutput
     displayName: 'Publish Build Package'
 
 - job:
@@ -76,8 +76,8 @@ jobs:
     inputs:
       buildType: 'current'
       downloadType: 'single'
-      artifactName: 'ADOBuildOutpot'
-      downloadPath: '$(System.ArtifactsDirectory)'
+      artifactName: 'ADOBuildOutput'
+      downloadPath: '$(Build.SourcesDirectory)'
 
   - task: CloudFoundryCLIInstall@0
     inputs:
