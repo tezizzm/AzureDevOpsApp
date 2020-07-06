@@ -56,7 +56,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      contents: './publish/**'
+      contents: 'publish/**'
       targetFolder: $(Build.ArtifactStagingDirectory)
       CleanTargetFolder: true
     displayName: 'Stage Application Package'
