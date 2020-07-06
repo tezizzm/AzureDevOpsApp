@@ -40,6 +40,7 @@ jobs:
   - script: |
       echo "Creating final application package..."
       dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
+      echo ls ./publish
       ls ./publish
     displayName: 'Package Final Application'
 
@@ -54,9 +55,9 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      contents: './publish/*'
+      contents: './publish/**'
       targetFolder: $(Build.ArtifactStagingDirectory)
-
+      CleanTargetFolder: true
     displayName: 'Stage Application Package'
 
   - task: PublishBuildArtifacts@1
