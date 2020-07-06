@@ -1,0 +1,4 @@
+applications:
+- name: AzureDevOpsDemo
+  buildpacks:
+  - dotnet_core_buildpack
