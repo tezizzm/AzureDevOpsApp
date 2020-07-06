@@ -15,6 +15,7 @@ variables:
   applicationProject: ./AzureDevOpsApp/AzureDevOpsApp.csproj
   system.debug: true
 
+
 jobs:
 - job: Build
   steps:
@@ -40,9 +41,9 @@ jobs:
 
   - script: |
       echo "Creating final application package..."
-      dotnet publish $(applicationProject) -o $(Build.BinariesDirectory) --configuration $(buildConfiguration)
-      echo echo $(Build.BinariesDirectory)
-      ls $(Build.BinariesDirectory)
+      dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
+      echo ls ./publish
+      ls ./publish
     displayName: 'Package Final Application'
 
   #- task: AzureFileCopy@4
@@ -56,7 +57,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      contents: $(Build.BinariesDirectory)/**
+      contents: publish/**
       targetFolder: $(Build.ArtifactStagingDirectory)
       CleanTargetFolder: true
     displayName: 'Stage Application Package'
