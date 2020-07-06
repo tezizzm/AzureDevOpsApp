@@ -39,12 +39,11 @@ steps:
     echo "Creating final application package..."
     dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
   displayName: 'Final Application Package'
-
-- task: AzureFileCopy@4
+  
+- task: AzureCLI@2
   inputs:
-    SourcePath: './publish'
+    scriptType: bash
     azureSubscription: 'PA-mkillens(cbe78075-3e2d-46ff-8124-83170bbf23e7)'
-    Destination: 'AzureBlob'
-    storage: 'stemcellassests'
-    ContainerName: 'assets'
-    BlobPrefix: 'ADOBuild'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az storage blob upload-batch -d "assets" --account-name "stemcellassests" -s "./publish"'
+    
