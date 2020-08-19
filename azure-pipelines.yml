@@ -92,6 +92,7 @@ jobs:
 - job:
   dependsOn: Test
   condition: succeeded('Test')
+  displayName: Deploy
   steps:
   - task: DownloadBuildArtifacts@0
     inputs:
