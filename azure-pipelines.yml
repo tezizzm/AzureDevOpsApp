@@ -35,16 +35,31 @@ jobs:
     displayName: 'Build Source'
 
   - script: |
+      echo "Creating final application package..."
+      dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
+    displayName: 'Package Application'
+    
+  - task: CopyFiles@2
+    inputs:
+      contents: publish/**
+      targetFolder: $(Build.ArtifactStagingDirectory)
+      CleanTargetFolder: true
+    displayName: 'Stage Application Package'
+    
+- job: Test
+  dependsOn: Build
+  steps:
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'ADOBuildOutput'
+      downloadPath: '$(Build.SourcesDirectory)'
+    
+  - script: |
       echo "Running tests..."
       dotnet test $(testProject)
     displayName: 'Execute Tests'
-
-  - script: |
-      echo "Creating final application package..."
-      dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
-      echo ls ./publish
-      ls ./publish
-    displayName: 'Package Final Application'
 
   #- task: AzureFileCopy@4
   #  inputs:
@@ -69,8 +84,8 @@ jobs:
     displayName: 'Publish Build Package'
 
 - job:
-  dependsOn: Build
-  condition: succeeded('Build')
+  dependsOn: Test
+  condition: succeeded('Test')
   steps:
   - task: DownloadBuildArtifacts@0
     inputs:
