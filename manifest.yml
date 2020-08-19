@@ -1,0 +1,5 @@
+applications:
+- name: AzureDevOpsDemo
+  buildpacks:
+  - dotnet_core_buildpack
+  path: ./ADOBuildOutput/publish
