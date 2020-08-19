@@ -46,6 +46,12 @@ jobs:
       CleanTargetFolder: true
     displayName: 'Stage Application Package'
     
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: ADOBuildOutput
+    displayName: 'Publish Build Package'
+    
 - job: Test
   dependsOn: Build
   steps:
