@@ -82,37 +82,3 @@ jobs:
       targetFolder: $(Build.ArtifactStagingDirectory)
       CleanTargetFolder: true
     displayName: 'Stage Application Package'
-
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: $(Build.ArtifactStagingDirectory)
-      artifactName: ADOBuildOutput
-    displayName: 'Publish Build Package'
-
-- job:
-  dependsOn: Test
-  condition: succeeded('Test')
-  displayName: Deploy
-  steps:
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      artifactName: 'ADOBuildOutput'
-      downloadPath: '$(Build.SourcesDirectory)'
-
-  # - task: CloudFoundryCLIInstall@0
-  #   inputs:
-  #     cfVersion: '6.43.0'
-
-  # - task: CloudFoundry@1
-  #   inputs:
-  #     cfEndpoint: 'PCF One'
-  #     org: 'pivot-mkillens'
-  #     space: 'tgen'
-  #     deploymentOptions: 'manifest'
-  #     cfManifest: './manifest.yml'
-  #     createServices: false
-  #     bindServices: false
-
-  
