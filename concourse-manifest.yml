@@ -1,0 +1,4 @@
+applications:
+- name: ConcourseDevOpsDemo
+  buildpacks:
+  - dotnet_core_buildpack
