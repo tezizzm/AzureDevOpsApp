@@ -5,6 +5,6 @@ Azure DevOps Pipeline Demo
 
 Test Status: ![Build Status](https://vsrm.dev.azure.com/mkillens/_apis/public/Release/badge/f02eed11-b446-471d-8e26-5fa07e0a8211/1/1)
 
-UAT Status: [![Build Status](https://vsrm.dev.azure.com/mkillens/_apis/public/Release/badge/f02eed11-b446-471d-8e26-5fa07e0a8211/1/2)]
+UAT Status: ![Build Status](https://vsrm.dev.azure.com/mkillens/_apis/public/Release/badge/f02eed11-b446-471d-8e26-5fa07e0a8211/1/2)
 
-Prod Status: [![Build Status](https://vsrm.dev.azure.com/mkillens/_apis/public/Release/badge/f02eed11-b446-471d-8e26-5fa07e0a8211/1/3)]
+Prod Status: ![Build Status](https://vsrm.dev.azure.com/mkillens/_apis/public/Release/badge/f02eed11-b446-471d-8e26-5fa07e0a8211/1/3)
